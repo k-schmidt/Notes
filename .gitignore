@@ -1,1 +1,4 @@
 How_to_Think_Like_a_Mathematician/.ipynb_checkpoints/*
+*.pyc
+*checkpoint.ipynb
+*.ipynb_checkpoints*
