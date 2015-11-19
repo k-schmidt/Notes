@@ -17,28 +17,28 @@ All programming languages must have:
 Function's prefix notation has several advantages:
 * Procedures can be an arbitrary number of elements
 
-'''clojure
-(+ 1 2 3 4 5 24)
-'''
+```clojure
+  (+ 1 2 3 4 5 24)
+```
 
 * Allows combinations to be nested and to have combinations whose elements themselves are combinations.
 
-'''clojure
+```clojure
 (+ (+ 1 2) (+ 3 4) (+ 5 6))
-'''
+```
 
 ## 1.1.2 Naming and the Environment
 * We say that the name identifies a variable whose value is the object.
 * *def* is our language's simplest means of abstraction, for it allows us to use simple names to refer to the results of compound operations.
 
-'''clojure
+```clojure
 (def radius 10)
 
 (def pi 3.14159)
 
 (def circumference
   (* 2 pi radius))
-'''
+```
 
 ## 1.1.3 Evaluating Combinations
 * Our goal is to isolate our issues about thinking procedurally.
@@ -76,7 +76,7 @@ We must evaluate each element of the combination. Thus, the evaluation rule is r
 Evaluate `(f 5)`
 We define f to be:
 
-'''clojure
+```clojure
 (defn square [x]
   (* x x))
 
@@ -95,7 +95,7 @@ We define f to be:
 (+ 36 100)
 
 136
-'''
+```
 
 * *Substitution Model* - model that determines the meaning of procedure applications.
  * Just a model to help us think about procedure applications, not to provide a description of how the interpreter really works.
@@ -112,12 +112,12 @@ Inside-Out Versus Outside-In
 ## 1.1.6 Conditional Expressions and Predicates
 Case analysis through `cond`
 
-'''clojure
+```clojure
 (defn abs [x]
   (cond ((> x 0) x)
         ((= x 0) 0)
         ((< x 0) (- x))))
-'''
+```
 
 General Form
 
@@ -130,20 +130,20 @@ Predicates `<p1>...<pn>` are checked for 'truthiness' and takes the first truthy
 
 Another way of computing the absolute value:
 
-'''clojure
+```clojure
 (defn abs [x]
   (cond ((< x 0) (- x))
         (else x)))
-'''
+```
 
 *Else* is a special symbol that can be used in place of the `<p>` in the final clause of cond.
 
 Yet another way...:
 
-'''clojure
+```clojure
 (defn abs [x]
   (if (< x 0) (- x) x))
-'''
+```
 
 * Uses special form *if*, a restricted type of conditional that is used when there are precisely two cases in the case analysis.
 
