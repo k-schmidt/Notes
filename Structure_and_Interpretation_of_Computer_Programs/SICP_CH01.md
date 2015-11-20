@@ -183,22 +183,22 @@ General Form
 * not is an ordinary procedure.
 
 Ex 1.3
-'''clojure
+```clojure
 (def sum-max [a b c]
   (cond ((and (> a c) (> b c)) (+ a b))
         ((and (> b a) (> c a)) (+ b c))
         ((and (> a b) (> c b)) (+ a c))))
-'''
+```
 
 Ex 1.4
 To apply a compound procedure to arguments, evaluate the body of the procedure with each formal parameter replaced by the corresponding argument.
-'''clojure
+```clojure
 (def a-plus-abs-b [5 -3]
   ((if (> -3 0) + -) 5 -3))
 
 (- 5 -3)
 8
-'''
+```
 
 Ex 1.5
 I believe Ben will receive and error in normal-order evaluation because the function (p) does not resolve and normal-order evaluation must blow-out all operations before evaluation. In applicative-order evaluation we replace the parameters of the body with the corresponding arguments and evaluate them if need be. The if special form never evaluates y because its predicate is true, resulting in the value 0.
@@ -221,7 +221,7 @@ We have a guess y for the value of a square root of a number x. We can perform a
 | 1.4142... |  |  |  |
 
 Simple Model of Procedure:
-'''clojure
+```clojure
 (defn sqrt-iter [guess x]
   (if (good-enough? guess x)
       guess
@@ -233,17 +233,17 @@ Simple Model of Procedure:
 
 (defn (average x y)
   (/ (+ x y) 2))
-'''
+```
 
 What is good enough? Choose! 0.001
 
-'''clojure
+```clojure
 (defn good-enough? [guess x]
   (< (abs (- (square guess) x)) .001))
-'''
+```
 
 Finally, we need an initial guess, 1.0
-'''clojure
+```clojure
 (defn sqrt [x]
   (sqrt-iter 1.0 x))
-'''
+```
