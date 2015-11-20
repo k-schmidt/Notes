@@ -158,4 +158,92 @@ General Form
 * Clojure has primitive predicates <, >, =
  * Also logical composition operations to support construction of compound predicates.
 
+General Form
+
 `(and <e1> <e2> ... <en>)`
+
+* From left to right, if any `<e>` evaluates to false then the value of the and expression is false and the remaining `<e>`'s are not evaluated.
+ * If all <e>'s are true then the and expression is the value of the last `<e>`.
+
+General Form
+
+`(or <e1> <e2> ... <en>)`
+
+* If any <e> is true, that value is returned as the value of the or expression and the remainder are unevaluated.
+ * If all <e>'s evaluate to false then the value of the or expression is false.
+
+General Form
+
+`(not <e>)`
+
+* Value of not expression is true when <e> is false and vice versa.
+
+* and, or are special forms
+ * The subexpression are not necessarily all evaluated.
+* not is an ordinary procedure.
+
+Ex 1.3
+'''clojure
+(def sum-max [a b c]
+  (cond ((and (> a c) (> b c)) (+ a b))
+        ((and (> b a) (> c a)) (+ b c))
+        ((and (> a b) (> c b)) (+ a c))))
+'''
+
+Ex 1.4
+To apply a compound procedure to arguments, evaluate the body of the procedure with each formal parameter replaced by the corresponding argument.
+'''clojure
+(def a-plus-abs-b [5 -3]
+  ((if (> -3 0) + -) 5 -3))
+
+(- 5 -3)
+8
+'''
+
+Ex 1.5
+I believe Ben will receive and error in normal-order evaluation because the function (p) does not resolve and normal-order evaluation must blow-out all operations before evaluation. In applicative-order evaluation we replace the parameters of the body with the corresponding arguments and evaluate them if need be. The if special form never evaluates y because its predicate is true, resulting in the value 0.
+
+## 1.1.7 Example: Square Roots by Newton's Method
+* Procedure must be effective
+ * Mathematical functions are not procedures because they do not describe a procedure.
+* Function vs. Procedure
+ * Distinction between describing properties of things and describing how to do things.
+  * Declarative knowledge vs. imperative knowledge
+  * What is vs. How to
+* Newton's method of successive approximations.
+We have a guess y for the value of a square root of a number x. We can perform a simple manipulation to get a better guess by averaging y with x/y.
+
+| Guess | Quotient | Average |
+| ----- | -------- | ------- |
+| 1 | 2/1 = 2 | ((2 + 1)/2) = 1.5 |
+| 1.5 | 2/1.5 = 1.3333 | ((1.3333 + 1.5)/2) = 1.4167 |
+| 1.4167 | (2/1.4167) = 1.4118 | ((1.4167 + 1.4118)/2) = 1.4142 |
+| 1.4142... |  |  |  |
+
+Simple Model of Procedure:
+'''clojure
+(defn sqrt-iter [guess x]
+  (if (good-enough? guess x)
+      guess
+      (sqrt-iter (improve guess x)
+      x)))
+
+(defn improve [guess x]
+  (average guess (/ x guess)))
+
+(defn (average x y)
+  (/ (+ x y) 2))
+'''
+
+What is good enough? Choose! 0.001
+
+'''clojure
+(defn good-enough? [guess x]
+  (< (abs (- (square guess) x)) .001))
+'''
+
+Finally, we need an initial guess, 1.0
+'''clojure
+(defn sqrt [x]
+  (sqrt-iter 1.0 x))
+'''
