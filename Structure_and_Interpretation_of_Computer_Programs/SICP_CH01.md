@@ -247,3 +247,68 @@ Finally, we need an initial guess, 1.0
 (defn sqrt [x]
   (sqrt-iter 1.0 x))
 ```
+
+Ex 1.6
+```clojure
+(defn new-if [predicate then-clause else-clause]
+  (cond (predicate then-clause)
+        (else else-clause)))
+        
+(defn sqrt-iter [guess x]
+  (new-if (good-enough? guess x)
+          guess
+          (sqrt-iter (improve guess x)
+                      x)))
+```
+Both conditions in a `cond` are evaluated versus the `if` statement which first evaluates the `predicate` and then either the `consequent` or the `alternative`.
+
+Ex 1.7
+`(sqrt .0001)` yields .0323 instead of the expected .01, yielding an error of 200%. For very large numbers, the machine is not able to represent very small differences. For very large numbers, .001 is too generous.
+```clojure
+(defn sqrt-iter [guess old-guess x]
+  (if (good-enough? guess old-guess)
+        guess
+      (sqrt-iter (improve guess x) guess x)))
+
+(defn good-enough? [guess old-guess]
+  (< (abs (- guess old-guess))
+     (* .001 guess)))
+     
+(defn sqrt [x]
+  (sqrt-iter 1.0 2.0 x))
+```
+
+Ex 1.8
+```clojure
+(defn cube [x]
+  (* x x x))
+  
+(defn improve [guess x]
+  (/ (+ (* 2 guess) (/ x (square guess)))
+     (3)))
+
+(defn good-enough? [guess x]
+  (< (abs (- (cube guess) x)) .001))
+  
+(defn cube-root-iter [guess x]
+  (if (good-enough? guess x)
+        guess
+      (cube-root-iter (improve guess x) x)))
+
+(defn cube-root [x]
+  (cube-root-iter 1.0 x))
+```
+
+## 1.1.8 Procedures as Black-Box Abstractions
+* In the square-root and cube-root problems we observed that the computation breaks up naturally into a number of *subproblems*.
+  * Each accomplished by a separate procedure
+  * The sqrt unit is a cluster of procedures.
+* It is crucial that each procedure accomplishes an identifiable task that can be used as a module in defining other procedures.
+* The higher order functions or *procedural abstractions* abstract away the "how" of the program and we only concern ourselves with the fact that the unit computes and gives an expected result.
+* Procedural definitions/abstractions suppress detail.
+  * A user of the procedure should not need to know how the procedure is implemented in order to use it.
+
+Local Names
+* The name of the formal parameter of a procedure doesn't matter.
+* Such a name is called a *bound variable*, and we say that the procedure *binds* its formal parameters.
+
