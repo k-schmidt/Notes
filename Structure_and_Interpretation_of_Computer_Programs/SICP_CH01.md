@@ -184,7 +184,7 @@ General Form
 
 Ex 1.3
 ```clojure
-(def sum-max [a b c]
+(defn sum-max [a b c]
   (cond ((and (> a c) (> b c)) (+ a b))
         ((and (> b a) (> c a)) (+ b c))
         ((and (> a b) (> c b)) (+ a c))))
@@ -193,7 +193,7 @@ Ex 1.3
 Ex 1.4
 To apply a compound procedure to arguments, evaluate the body of the procedure with each formal parameter replaced by the corresponding argument.
 ```clojure
-(def a-plus-abs-b [5 -3]
+(defn a-plus-abs-b [5 -3]
   ((if (> -3 0) + -) 5 -3))
 
 (- 5 -3)
