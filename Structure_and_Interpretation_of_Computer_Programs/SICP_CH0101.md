@@ -1,4 +1,4 @@
-# Structure and Interpretation of Computer Programs - Chapter 1
+# Structure and Interpretation of Computer Programs - Chapter 1.1
 ## Introduction by Alan J. Perlis
 * A programmer should acquire good algorithms and idioms.
 * It is better to have 100 functions operate on one data structure than to have 10 functions operate on 10 data structures.
