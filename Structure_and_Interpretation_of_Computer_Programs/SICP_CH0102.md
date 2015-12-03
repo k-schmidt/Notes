@@ -94,7 +94,7 @@ Please see Scheme solution [here](http://community.schemewiki.org/?sicp-ex-1.10)
 ```
 * At each branch of tree recursion, the procedure calls itself twice.
 * The number of leaves of a fibonacci tree is Fib(n+1) and is a terrible way to calculate fibonacci because of the amount of redundancy.
-* The value of Fib(n) grows exponentially at the ratio of $\phi^2 = \phi + 1$
+* The value of Fib(n) grows exponentially at the ratio of ![img](http://www.sciweavers.org/tex2img.php?eq=%20%5Cphi%20%5E2%20%3D%20%20%5Cphi%20%2B%201&bc=White&fc=Black&im=jpg&fs=12&ff=mathdesign&edit=0)
 * The numbeer of **steps** required by a tree-recursive process will be proportional to the number of nodes in the tree.
 * The **space** required will be proportional to the maximum depth of the tree.
 
