@@ -83,3 +83,88 @@ Ex 1.9
 
 Ex 1.10
 Please see Scheme solution [here](http://community.schemewiki.org/?sicp-ex-1.10).
+
+## 1.2.2 Tree Recursion
+```clojure
+(defn fib [n]
+  (cond (= n 0) 0
+        (= n 1) 1
+        :else (+ (fib (dec n))
+                 (fib (- n 2)))))
+```
+* At each branch of tree recursion, the procedure calls itself twice.
+* The number of leaves of a fibonacci tree is Fib(n+1) and is a terrible way to calculate fibonacci because of the amount of redundancy.
+* The value of Fib(n) grows exponentially at the ratio of $\phi^2 = \phi + 1$
+* The numbeer of **steps** required by a tree-recursive process will be proportional to the number of nodes in the tree.
+* The **space** required will be proportional to the maximum depth of the tree.
+
+### Compute Fibonacci Iteratively
+Use a and b as state variables
+```clojure
+(defn fib-iter [a b count]
+  (if (= count 0)
+      a
+      (fib-iter b (+ a b) (dec count))))
+
+(defn fib [n]
+  (fib-iter 0 1 n))
+```
+
+## Example: Counting Change
+* How many different ways can we make change of $1.00 given half-dollars, quarters, dimes, nickels, pennies?
+* More generally, can we write a procedure to compute the number of ways to change any given amount of money?
+  * Suppose we think of the types of coins available as arranged in some order.
+  * Then the number of ways to change amount `a` using `n` kinds of coins equals:
+    * The number of ways to change amount `a` using all but the first kind of coin, plus
+    * The number of ways to change amount `a-d` using all `n` kinds of coins, where `d` is the denomination of the first kind of coin.
+* The total number of ways to make change for some amount is equal to the number of ways to make change for the amount without using any of the first kind of coin, plus the number of ways to make change assuming that we use the first kind of coin.
+
+* If `a` is exactly 0, we should count that as 1 way to make change.
+* If `a` is less than 0, we should count that as 0 ways to make change.
+* If `n` is 0, we should count that as 0 ways to make change.
+
+```clojure
+(defn first-denomination [kinds-of-coins]
+  (cond (= kinds-of-coins 1) 1
+        (= kinds-of-coins 2) 5
+        (= kinds-of-coins 3) 10
+        (= kinds-of-coins 4) 25
+        (= kinds-of-coins 5) 50))
+
+(defn cc [amount kinds-of-coins]
+  (cond (= 0 amount) 1
+        (or (= amount 1) (= 0 kinds-of-coins) 0)
+        :else (+ (cc amount (dec kinds-of-coins))
+                 (cc (- amount (first-denomination kinds-of-coins)) kinds-of-coins))))
+
+(defn count-change [amount]
+  (cc amount 5))
+```
+
+Ex 1.11
+```clojure
+;; f(n) = n if n < 3
+;; f(n) = f(n-1) + 2(f(n-2)) + 3(f(n-3)) if n >= 3
+
+;; Recursive Solution
+(defn recur-input [input]
+  (if (< n 3)
+      n
+      (+ (recur-input (- input 1))
+         (* (recur-input (- input 2)) 2)
+         (* (recur-input (- input 3)) 3)))))
+
+;; Iterative Solution
+(defn iter-input [a b c count]
+  (if (< count 3)
+      a
+      (iter-input (+ a (* 2 b) (* 3 c))
+                  a
+                  b
+                  (dec count))))
+
+(defn iter-solution [n]
+  (if (< n 3)
+      n
+      (iter-input 2 1 0 n)))
+```
