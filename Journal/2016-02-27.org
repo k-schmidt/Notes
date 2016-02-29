@@ -1,0 +1,38 @@
+* <2016-02-27 Sat 17:13>
++ Kyle Schmidt
+
+** Paradigms of Artificial Intelligence Programming
+By: Peter Norvig
+
+*** Chapter Two
+  + The craft of programming includes knowing what /not/ to write, as well as what to write. (Chapter 2)
+  + This style of programming is called /data-driven/ programming, because the data drives what the program does next.
+    It is a natural and easy-to-use style, leading to concise and extensible programs, because it is always possible to add a new piece of data with a new association without having to modify the original program.
+    + The moral is to make your code as general as possible, because you never know what you may want to do with it next.
+    
+  + 6 Maxims that every programmer should follow:
+    1. Be specific.
+    2. Use abstractions.
+    3. Be concise.
+    4. Use the provided tools.
+    5. Don't be obscure.
+    6. Be consistent.
+
+*** Chapter Three
+  + Introducing a macro puts much more memory strain on the reader of your program.
+  + Introduce macros only when there is a clear need, and when the macro fits in well with your existing system.
+
+*** Chapter Four
+  + 5 Stages in Developing a Program
+    1. Problem Description
+       + Rough idea of what we want to do.
+    2. Program Specification
+       + Redescribe the problem in terms that are closer to a computable procedure.
+    3. Implementation of the Program in a Programming Language
+    4. Testing
+    5. Debugging and Analysis
+
+
+Aside: /Human Problem Solving/ by Newell and Simon 1972
+
+ 
