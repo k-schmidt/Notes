@@ -1,0 +1,107 @@
+* [2016-02-28 Sun 13:16]
+
+** Sytems Thinking: [[https://www.youtube.com/watch?v=lhbLNBqhQkc][Systems Thinking white boarding animation project]]
+   What is systems thinking?
+   + Deterministic System
+     + Determine the outcome by changing the processes
+   + Open System
+     + Multiple layers of context. System within a system that as inputs and outputs.
+   + Optimize scarce resources.
+     + Critical path Tasks.
+       + Should be completed first because these tasks will take longer. And require more care.
+   + Barriers exist and tools need to be created to help process go forward.
+   + Feedback loop and Feedforward loop
+     + Regulating the input and process for the desired output.
+   + Having a tool for multiple uses can also be bad in order to defeat multiple barriers.
+     + A tool that operates as a hammer and a screwdriver is neither a good hammer nor a good screwdriver.
+     + Separate tools for each duty or ONE tool for everything?
+       + Once you identify an optimum design then you maintain that design for future use.
+   + Purchasing decisions also influence systems and choose the most optimal solutions.
+
+*** Three Levels of Optimization
+   There is only so much one can do before the system requires redesign.
+   1. Optimization within the structures
+      + System management
+      + Regulating the process
+   2. Optimization of the system structures.
+      + System Design
+      + Rearranging or replacing tools
+   3. Optimization of the context system structures.
+      + Global System Design
+      + Integrating with fellow citizens
+
+** [[https://www.youtube.com/watch?v=2vojPksdbtI][Systems Thinking and Evaluation]]
+   + By only focusing on a part of the system, it ignores other parts of the larger system.
+
+** [[https://www.youtube.com/watch?v=0QtQqZ6Q5-o][Peter Senge: "Systems Thinking for a Better World"]]
+*** Problem of Interdependence
+    1) All of a sudden human and nature are two separate things.
+    2) Extraordinary web of interdependence. There is no such thing as living separate.
+    3) Systems on top of systems.
+    4) We've built systems that rely on systems that are abstracted so that we do not have to think of these things.
+    5) No one wants to produce the systemic outcomes that we consistently produce.
+    6) Systems ignorance - we live in a world where we consistently produce suffering for each other, for other humans and for living creatures.
+    7) We have so little ability to be aware of the consequences of our own actions.
+       + Our interdependence has grown and our level of awareness has declined.
+    8) If our niche is to be the planet, what is the consciousness that that will require?
+       + Given the particularites of this species we cannot exist in any niche without an ethos or ideas that enable us to exist in a niche. We need ways of talking, ways of being which will help to reflect on our awareness.
+    9) Minute 28 - Object Orientedness
+       + Nouns are abstractions of objects.
+    10) How do we start to close the gap between the interdependence that we create and the interdependence we understand?
+        1) We need to rediscover our love for the natural world.
+    11) Structural harmony with our environment - not our thought processes.
+    
+** [[https://www.youtube.com/watch?v=AnTwZVviXyY][Introduction to System Dynamics: Overview]] <2016-02-28 Sun 16:06>
+   Systems Thinking and System Dynamics are Tools to...
+   + Elicit and articulate mental models and impact of social and organizational structure.
+   + Expand mental models by explicitly accounting for feedback.
+   + Test and improve mental models and structures via simulation.
+     + The simulation will improve our mental models.
+
+   + Structure generates behavior
+     + Dynamics emerge from the interaction of:
+       + Physics
+       + Information availability
+       + Decision rules
+   
+   + Mental models matter (a lot).
+     + It is not enough to change physical structure, information, and incentives.
+
+   + The Fundamental Attribution Error
+     + Our first instinct is to blame the people in the system. Almost always a low-leverage response.
+
+** BDD (Behavior-driven Development) <2016-02-28 Sun 17:12>
+[[https://en.wikipedia.org/wiki/Behavior-driven_development][BDD (Behavior-driven development)]] :: Software development process that emerged from TDD. Combines the principles of TDD with ideas from domain-driven design and object-oriented analysis and design to provide software development and management teams with shared process to collaborate on software development.
+*** BDD focuses on:
+1. Where to start in the process
+2. What to test and what not to test
+3. How much to test in one go
+4. What to call the tests
+5. How to understand why a test fails
+
+*** Principles of BDD
+  + Define a test set for the unit /first/.
+  + Then implement the unit.
+  + Finally verify that the implementation of the unit makes the tests succeed.
+
+Behavior-driven development specifies that tests of any unit of software should be specified in terms of the desired behavior of the unit.
+Desired behavior :: requirements set by the business - that is, the desired behavior that has business value for whatever entity commissioned the software unit under construction.
+
+** [[https://en.wikipedia.org/wiki/Test-driven_development][Test-driven Development]] <2016-02-28 Sun 17:42>
+Test-driven Development :: Software development process that relies on the repetition of a very shoft development cycle:
+1. The developer writes an (initially failing) automated test case that defines a desired improvement or new function.
+2. Produces a minimum amount of code to pass that test.
+3. Refactors the new code to acceptable standards.
+
+*** Test Structure
++ Setup
++ Execution
++ Validation
++ Cleanup
+
+*** Individual Best Practices
++ Separate common set-up and teardown logic.
++ Keep each test oracle focused on only the results necessary to validate its test.
++ Design time-related tests to allow tolerance for execution in non-real time operating systems.
++ Treat your test code with the same respect as your production code.
++ Get together with your team and review your tests and test practices to share effective techniques and catch bad habits.
