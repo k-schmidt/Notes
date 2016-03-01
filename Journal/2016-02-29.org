@@ -1,0 +1,48 @@
+* <2016-02-29 Mon 10:22>
+
+** DONE Meeting with Evan <2016-02-29 Mon 11:01>
+1. Workbench/Suppression Tables
+   Not super urgent but we do not have an update
+   Use Workbench table for final table.
+2. Unique identifier in the adobe table
+   Came up in the context of the preference center.
+   + We will receive a unique identifier in our adobe data.
+     + Column in the activity/delivery table should be the same.
+   + Figure out the unique identifier of our already existing prospects. Data was passed today. Email Address & Unique ID.
+     + Ask client to provide diffs of new unique ids daily.
+     + Pass unique ids in daily and deployment table. (Update email feed).
+3. Form 5500
+   + Prospecting database, Form 5500.
+     + Download data from website
+       + Forms:
+         + Form 5500 Annual Return report of Employee Benefit Plan
+         + Form 5500-SF
+         + Schedule H
+         + Schedule I
+       + Unique ID = EIN
+     + Run python script (recreate) and clean up data so that it is consistent.
+     + Pass to D&B
+     + D&B passes back to us and we replace Form 5500 table in DB.
+
+** DONE Workbench Suppression Tables <2016-02-29 Mon 15:15>
+
+*** MySQL AutoIncrement
+    + Auto Increment can only be used on an indexed table.
+#+BEGIN_SRC sql
+ALTER TABLE `TABLE` ADD INDEX (`COLUMN`);
+ALTER TABLE `TABLE` MODIFY COLUMN `COLUMN` INT auto_increment;
+#+END_SRC
+
+Pulled file down from BrickFTP <2016-02-29 Mon 13:02>. Ready to ingest
+
+** DONE Pass Rupesh Form 5500 pandas scripts <2016-02-29 Mon 18:48>
+
+** Aside: Adding Code Blocks to Org-mode
++ <s <TAB>
+
+** Created dotfiles repo <2016-02-29 Mon 14:07>
+Created symlinks for configuration files that I use on a daily basis.
+
+** Started New Ingestion Process <2016-02-29 Mon 15:28>
+
+PDF :: Portable Document Format
