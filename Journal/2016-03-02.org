@@ -1,0 +1,29 @@
+* <2016-03-02 Wed 08:56>
+* DONE Make Rupesh 30-60-60 day plan
+* DONE Send Rupesh business card info to operations team
+* TODO Migrate EC2 code to production EC2 instance
+* TODO Add process to Salesnet progrm
+
+Check SalesNet tomorrow (Thursday March 04, 2016)
+
+Send SalesNet a file of previous counts of deliveries if count is greater than 100.
+Check out discrepancy with DM. Leads does not match Direct_Mail AXA_Prospecting & 403b.
+  + Add some sort of unique id.
+    + Consider adding two columns: Profil and NetprospexID
+ 
+* <2016-03-02 Wed 14:50> Anlyzing Segmentation
+#+BEGIN_SRC postgresql
+SELECT
+pixel_id,
+COUNT(DISTICT
+  (CASE WHEN v1 NOT IN (
+    SELECT paypal_id FROM kepler_paypal_segmentation.hvp_prospects) THEN v1 END)) AS count_not_in,
+COUNT(DISTINCT v1) AS count
+FROM mmt1.events
+WHERE v1 != '\\N'
+AND partitiondate >= (CURRENT_DATE - 31)
+AND advertiser_id = '136505'
+GROUP BY pixel_id;
+#+END_SRC
+
+<2016-03-02 Wed 17:15> Could not figure out the discrepancy between mmt1 data feed and client's data.
