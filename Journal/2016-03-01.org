@@ -1,0 +1,14 @@
+* <2016-03-01 Tue 09:19>
+**** DONE Fix Adobe Email Ingestion
+**** DONE TDS - Design Review 11am-12pm
+**** DONE TDS - Backlog 2pm-3pm
+**** DONE TDS - Design Review 3pm-4pm
+**** DONE Unit Testing Time 4pm-5:30pm
+
+getattr(object, attribute)
++ Works on modules...cool!
+
+[[http://scrapy.org/][Scrapy - Webscraper like BeautifulSoup]]
+
+**** DONE <2016-03-01 Tue 12:38> Shutdown MySQL read database
+
