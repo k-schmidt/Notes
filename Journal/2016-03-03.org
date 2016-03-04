@@ -1,0 +1,17 @@
+* 2016-03-03 Thu 09:22
+**** TODO Fix Workbench Tables Prospecting and 403b
+**** TODO Fix Suppression Tables Prospecting and 403b
+**** TODO Migrate EC2 code to production EC2 instance
+**** TODO Add process to Salesnet program
+
+Check SalesNet tomorrow (Thursday March 04, 2016)
+
+Send SalesNet a file of previous counts of deliveries if count is greater than 100.
+Check out discrepancy with DM. Leads does not match Direct_Mail AXA_Prospecting & 403b.
+  + Add some sort of unique id.
+    + Consider adding two columns: Profil and NetprospexID
+
+SalesNet did not send their file as promised.
+
+**** 2016-03-03 Thu 14:14 Fixed method to snet report to make it extendable
+**** 
