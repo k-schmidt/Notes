@@ -10,3 +10,9 @@
  + Change filepaths in the config files for each respective process to align with the new environment. (if necessary)
 
 ***** Aside: Snet still did not send their file
+
++ uploaded twitter and nielsen projects to github.
+  + changed interface slightly for date ranges to nielsen.
++ learned argparse library in python
++ wrote sftp access instructions for client.
++ helped rupesh push changes to snet process.
