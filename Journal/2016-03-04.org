@@ -1,0 +1,12 @@
+* 2016-03-04 Fri 09:50
+**** DONE Ingest Direct Mail Data
+**** TODO Fix Suppression Tables
+ + Still waiting on specs
+
+**** TODO Migrate Code to EC2 Instance
+ + Moved secure configurations to S3 and cloned the repo.
+ + Need to pull secure configurations down from s3 to the appserver.
+ + Need to create virtualenvs in respective folders and pip install requirements.
+ + Change filepaths in the config files for each respective process to align with the new environment. (if necessary)
+
+***** Aside: Snet still did not send their file
