@@ -1,0 +1,146 @@
+* <2016-03-07 Mon 09:51>
+study the collections library in Python using namedtuple and Collection as well as OrderedDict and defaultdict.
+
+Be careful when using empty lists as a default init attrbute.
+
+#+BEGIN_SRC python
+class HautedBus:
+    def __init__(self, passengers=[]):
+        self.passengers = passengers
+
+    def pick(self, name):
+        self.passengers.append(name)
+
+    def drop(self, name):
+        self.passengers.remove(name)
+
+bus1 = HauntedBus(['Alice', 'Bill'])
+bus1.passengers
+>> ['Alice', 'Bill']
+bus1.pick('Charlie')
+bus1.drop('Alice')
+bus1.passengers
+>> ['Bill', 'Charlie']
+
+bus2 = HauntedBus()
+bus2.pick('Carrie')
+bus2.passengers
+>> ['Carrie']
+
+bus3 = HauntedBus()
+bus3.passengers
+>> ['Carrie']
+# WHAT?!?!
+#+END_SRC
+
+Creating your own iterables
+#+BEGIN_SRC python
+class Vector2d:
+    typecode = 'd'
+    def __init__(self, x, y):
+        self.x = float(x)
+        self.y = float(y)
+
+    def __iter__(self):
+        return (i for i in (self.x, self.y))
+
+d = Vector2d(1, 2)
+for x in d:
+    print(x)
+>> 1.0
+>> 2.0
+#+END_SRC
+
+Python Protocols
+#+BEGIN_SRC python
+import collections
+
+# class is not shuffleable
+Card = collections.namedtuple('Card', ['rank', 'suit'])
+
+class FrenchDeck:
+
+    ranks = [str(n) for n in range(2, 11)] + list('JQKA')
+    suits = 'spades diamonds clubs hearts'.split()
+
+    def __init__(self):
+        self._cards = [Card(rank, suit) for suit in self.suits
+                                        for rank in self.ranks]
+
+    def __len__(self):
+        return len(self._cards)
+
+    def __getitem__(self, position):
+        return self._cards[position]
+
+class FrenchDeck2(collections.MutableSequence):
+
+    ranks = [str(n) for n in range(2, 11)] + list('JQKA')
+    suits = 'spades diamonds clubs hearts'.split()
+
+    def __init__(self):
+        self._cards = [Card(rank, suit) for suit in self.suits
+                                        for rank in self.ranks]
+
+    def __len__(self):
+        return len(self._cards)
+
+    def __getitem__(self, position):
+        return self._cards[position]
+
+    def __setitem__(self, position, value):
+        self._cards[position] = value
+
+    def __delitem__(self, position):
+        del self._cards[position]
+
+    def insert(self, position, value):
+        self._cards.insert(position, value)
+#+END_SRC
+
+
+---
+
+** Elm
+
+#+BEGIN_SRC elm
+module Fibonacci where
+
+
+import List exposing ((::), map2, reverse)
+
+
+fibonacci : Int -> List Int
+fibonacci n =
+    let fibonacci' n k1 k2 acc =
+        if n <= 0
+            then acc
+            else fibonacci' (n-1) k2 (k1+k2) (k2 :: acc)
+    in
+        fibonacci' n 0 1 [] |> reverse
+
+
+fibonacciWithIndexes : Int -> List (Int,Int)
+fibonacciWithIndexes n = map2 (,) [0..n] (fibonacci n)
+
+-- Elm list
+["a", "b", "c", "d", "e"]
+
+-- ::
+> 7 :: [1,2,3,4]
+[7,1,2,3,4] : List number
+
+> import List exposing (..)
+> reverse [1,2,3,4[
+[4,3,2,1] : List number
+
+-- Elm tuples
+> (1, "a")
+(1,"a") : ( number, String )
+
+> (,) 1 "a"
+(1,"a") : ( number, String )
+> (,,) 1 "a" 4.0
+(1,"a",4) : ( number, String, Float )
+
+#+END_SRC
