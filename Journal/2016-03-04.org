@@ -16,3 +16,43 @@
 + learned argparse library in python
 + wrote sftp access instructions for client.
 + helped rupesh push changes to snet process.
+
+** [[https://www.youtube.com/watch?v=oKg1hTOQXoY][Alan Kay at OOPSLA 1997]]
++ Earliest form of data abstraction.
+  + Third part of tape will containg "Data" Records.
+  + Second part will contain procedures.
+  + First part will be pointers. And make the first 10 pointers standard.
+html presupposes that there is a browser that can understand html.
+You don't need a browser. Just read it in and travel with all the things it needs and does not require anything complicated. Be able to distribute all the things that are there.
+
+From clockwork to Biology
+clocks, doghouses do not scale very well.
+Cells, on the otherhand, do scale _very_ well.
+
+Do not let the interior of any one of these things to be a factor in the computation of the whole.
+Cell membrane is there to keep most things out as much as it is there to keep most things in.
+
+Once you have encapsulated in such a way that there is an interface between the inside and outside, it is possible to make an object act like anything. What  you have encapsulated is a computer.
+Take the powerful thing that you are working on and not losing it by partitioning up your design space.
+
+We can take the DNA out of the cells, allowing us to deal with cystic fibrosis.
+
+Notion of metaprogramming
+Any particular implementation is making pragmatic choices and these choices are hindering the level of efficiency and composability.
+
+The more the language can see its own structures, the more liberated you can be from a single implementation.
+
+How do we interop on the internet?
+Dozens and dozens of different object systems all with similar semantics but different pragmatic details.
+
+Any object oriented language can internalize its own local pointers.
+Therefore, a semantic interop is possible immediately.
+
+Aside: The Art of the Metaobject Protocol
+Most practical insights about OOP
+
+We don't know how to design systems yet.
+We need to constantly think about what is important. Let our systems dictate the levels of abstraction.
+
+Plan  your systems more grand than they seem to be right now.
+Plan your systems so that they can grow.
