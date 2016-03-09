@@ -1,0 +1,70 @@
+* <2016-03-08 Tue 09:15>
+
+**** TODO Backfill data into MySQL db
+**** DONE TDS - Design Review 11am-12pm
+
+****** Docker Notes
+Much smaller image and removes OS dependencies to make it run.
+Running a virtual machine but it is much smaller and you have to specify what you want installed in that image.
+Vagrant is not a perfect replication across virtual envs.
+
+Docker container is a self contained app.
+CoreOS is designed to run Docker containers.
+
+Docker engine and on top of that you can run the Docker containers.
+Deploy images to Github repositories or AWS in our instance.
+
+With continuous integration you can push changes to containers.
+
+Dockerfile - set of rules, telling the container what you want installed.
+Docker.com has templates that you can inherit.
+
+#+BEGIN_SRC bash
+docker images
+# to see images
+
+docker ps
+# to see running containers
+#+END_SRC
+
+****** How to Launch Docker Container
+Container must be in the root directory of the project.
+1. Select an image
+   1. Selecting a specific piece of code that describes a system.
+2. Create Dockerfile
+3. `docker build -t example`
+
+**** DONE TDS - Backlog 2pm-3pm
+Management team has asked for more visibility into what we are doing in order to monitor adhoc requests.
+Two days of adhoc work is two days missed of more pressing issues.
+
+It is hard to estimate timing, many recommend heurstic (low, medium, high) time priority.
+Add fourth category "N" negligible -- Something that takes a few hours to do.
+
+Management team feels that we should always be working on at least two projects towards the greater KIP goal.
+
+Part of this new process is to avoid overlap, duplicating efforts across the company.
+
+Anything that is being branded as KIP will need to be routed through management.
+
+**** DONE TDS - Retrospective 3pm-4pm
+Last time:
+Well:
+1. Knowledge
+2. Efficiency
+3. Innovation
+
+Not Well:
+1. Siloed
+2. Standards
+3. Testing
+
+Improvements:
+1. Continue Tuesday meetings
+2. Assignment review meetings
+3. Testing time with entire team
+
+This Time:
+Well:
+
+**** TODO Unit Testing 4pm-5:30pm
