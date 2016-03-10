@@ -1,0 +1,37 @@
+* <2016-03-09 Wed 11:26>
+
+**** TODO Create Adobe Ingestion for "Adobe_Recipient_List_Daily_YYYY-MM-DD.csv"
+
+**** February Retrospective Results:
+| Well | Feedback | 5 |
+| Well | Teamwork | 3 |
+| Well | Transparency | 3 |
+| Not Well | External Product Adoption | 6 |
+| Not Well | External Transparency/Training | 7 |
+| Not Well | Feedback (Upper Management) | 5 |
+| Improvements | External Transparency via Documentation and Training | 11 |
+| Improvements | Discuss Technical Advancements and Opportunities | 4 |
+| Improvements | Project Management | 3 |
+
+***** Functions over lists
+Top-down software development
+1. The first step is to understand how to do the calculation by hand.
+2. Write a main function to solve the problem, /assuming/ that some auxiliary functions are known.
+3. Complete the solution by writing auxiliary functions.
+
+***** Correctness
+To prove correctness, we have to reason about the program.
++ We need a mathematical model of operations of the programming language, defining what they do.
+  + Semantics of the language.
++ We need to define what we would like the program to do. Usually, this is a mathematical definition of the inputs that the program needs and the output that it calculates.
+  + Program specification.
++ We use mathematical techniques to reason about the program, using semantics. We would like to demonstrate that the program satisfies the specification.
+
+We can prove functionality using mathematical induction.
+Show that the program works for a simple base case. Then show that it works for the next case.
+
+***** Lazy Evaluation
+A calculation is done only when the result is needed.
+ + Sometimes called data-driven and demand-driven evaluation.
+
+
