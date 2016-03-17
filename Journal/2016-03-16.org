@@ -132,3 +132,21 @@ PYTHON_FILE=$DIR/main.py
 source $VENV
 python $PYTHON_FILE -m "$MIN_DATE" -M "$MAX_DATE"
 #+END_SRC
+
+*** Emacs Lisp
+let*
+#+BEGIN_SRC elisp
+(setq y 2)
+
+(let ((y 1)
+      (z y))
+  (list y z)) => (1 2)
+
+(let* ((y 1)
+       (z y))
+  (list y z)) ; => (1 1)
+#+END_SRC
+
+cl-case
++ Conditional form that augments Emacs Lisp's simple, if, and, or, and cond forms.
+(/keylist body-forms/...)
