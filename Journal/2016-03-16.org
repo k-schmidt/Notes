@@ -1,0 +1,134 @@
+* <2016-03-16 Wed 07:55>
+
+Design recipe checklist:
+1. Description of the class of problem data.
+2. Informal specification of a program's behavior.
+3. Illustration of the behavior with examples.
+4. Development of a program template of layout.
+5. Transformation of the template into a complete definition.
+6. Discovery of errors through testing.
+
+Concepts of programming:
+1. Relating one quantity to another quantity.
+2. Evaluating a relationship by substituting values for names.
+
+Proper Program Design:
+1. Analyze a problem statement, stated as a word problem.
+2. Express its essence, abstractly and with examples.
+3. Formulate statements and comments in a precise language.
+4. Evaluate and revise these activities in light of checks and tests.
+5. Pay attention to details.
+
+Information expressed in a programming language is called *data*.
+
+As in arithmetic or algebra, we can nest expressions:
+
+#+BEGIN_SRC racket
+(* (+ 2 2) (/ (* (+ 3 5) (/ 30 10)) 2))
+#+END_SRC
+
+Scheme evaluates these expressions exactly as we do.
+It first reduces the innermost parenthesized expressions to numbers, then the next layer, and so on.
+
+Mathematical operations:
+1. (sqrt A)
+2. (expt A B)
+3. (remainder A B)
+4. (log A)
+5. (sin A)
+
+inexact number
+(sqrt 2)
+= #i1.4142135...
+
+The #i notation warns the programmer that the result is an approximation of the true number.
+A computer has a finite size and can only represent a portion of such a number.
+
+1. (sqr A)
+2. (sin (/ pi 2))
+3. (max A B)
+4. (tan A)
+
+;; semicolons are one-line comments
+#|
+multiline comments
+| #
+
+(number->string A)
+(string->number A)
+
+Booleans
+(and #true #true)
+(and #true #false)
+
+Conditionals
+(> 10 9)
+(< -1 0)
+(= 42 9)
+
+(string=? A B C)
+  - determines if all strings are equal
+
+***** TODO Read /How to Design Programs/
+#+BEGIN_SRC racket
+(define (y x)
+  (* x x))
+#+END_SRC
+
+The *define* says "consider y a function" and supply one value.
+(*define* (/FunctionName/ /InputName/)
+  /BodyExpression/)
+
+conditional expression
+#+BEGIN_SRC racket
+(define (sign x)
+  (cond
+    [(> x 0) 1 ]
+    [(= x 0) 0 ]
+    [(< x 0) -1]))
+#+END_SRC
+
+Constant Definitions
+(*define* /Name/ /Expression/)
+
+Proper programming is far more than the mechanics of acquiring a language.
+It is about:
+  + Reading problem statements and extracting the important concepts.
+  + Figuring out what is really wanted.
+  + Exploring examples to strengthen your intuitive understanding of the problem.
+  + Organizing logic and knowing what you don't know yet.
+  + Knowing how and why your code works.
+
+Proper programming is about solving problems systematically and conveying the ideas within the code.
+
+*** Fixed-Size Data
+
+**** Arithmetic
+Four forms of atomic data:
+1. numbers
+2. strings
+3. images
+4. boolean values
+
+#+BEGIN_SRC racket
+(define x 3)
+(define y 4)
+
+(define (cartesian-point x y)
+  (sqrt (+ (sqr x) (sqr y))))
+#+END_SRC
+
+Added bash script to for Python process
+#+BEGIN_SRC bash
+#!/bin/bash
+
+MIN_DATE=`date +%Y-%m-%d -d "5 days ago"`
+MAX_DATE=`date +%Y-%m-%d`
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+VENV=$DIR/venv/bin/activate
+PYTHON_FILE=$DIR/main.py
+
+source $VENV
+python $PYTHON_FILE -m "$MIN_DATE" -M "$MAX_DATE"
+#+END_SRC
