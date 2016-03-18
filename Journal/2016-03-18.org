@@ -1,0 +1,58 @@
+* <2016-03-18 Fri 09:38>
+
+** Functions
+
+A function definition introduces a new operation on data.
+It adds an operation to our vocabulary if we think of the primitive operations as the ones that are always available.
+
+Variables are not data; they represent data.
+
+*Applications* :: A function application puts defined functions to work and it looks just like the applications of a pre-defined operation.
+
+*** Computing
+1. Determines the values of the argument expressions.
+2. Checks that the number of arguments and the number of function parameters are the same.
+   1. If so, compute the value of the body of the function with all parameters replaced by the corresponding argument values.
+3. The last value is the value of the function application.
+
+*** Composing Functions
+When a program refers to distinct tasks of computation, a program should consist of one function per task and a main function that puts it all together.
+/Define one function per task/.
+Why?
+1. You get reasonably small functions.
+   1. Easy to comprehend.
+   2. Composition is easy to understand.
+2. Getting small function to work correctly is much easier than doing so with large ones.
+3. If you need to change a part of the program due to some change to the problem statement, it tends to be much easier to find the relevant parts when it is organized as a collection of small functions as opposed to a large, monolithic block.
+
+*** Global Constants
+By convention, we use upper-case letters for global constants.
+/Introduce definitions for all constants mentioned in a problem statement./
+
+*** Programs
+*Batch Programs* :: a program that consumes all of its inputs at once and computes the result from these inputs.
+Its main function may expect the arguments themselves of the names of files from which to retrieve the inputs.
+Similarly, it may just return the output or it may place it in a file.
+
+Designing an interactive program requires a way to designate some function as the one that takes care of keyboard events, another function for dealing with clock tick, a third one for presenting some data as an image, and so forth.
+It is the task of an interactive program's main function to communicate these designations to the operating system or the platform on which the program in launched.
+
+*** Designing Programs
+A good program comes with a short write-up that explains what it does, what inputs it expects, and what is produces.
+_Programmers write programs for other programmers to read_
+
+Process:
+1. Express how you wish to represent information as data. A one-line comment suffices.
+2. Write down a signature, a purpose statement, and a function header.
+   1. Comment that tells the readers of your design how many inputs your function consumes, from what collection of data they are drawn, and what kind of output data it produces.
+3. Illustrate the signature and the purpose statement with some functional examples.
+4. The next step is to take inventory, to understand what are the givens and what we need to compute.
+5. Code.
+6. Test.
+
+*** Domain Knowledge
+1. Knowledge from external domains such as mathematics, music, biology, civil engineering, art, etc.
+2. Knowledge about the library functions in the chosen programming language.
+
+*** Functions->Programs
+

@@ -1,0 +1,11 @@
+* <2016-03-17 Thu 09:07>
+
+*** TODO Adobe_Recipient table
+1. Change "contact_flag" to "do_not_contact_flag" <2016-03-17 Thu 09:37>
+2. Add Error Alerts
+3. Refactor
+4. Automate
+
+*** TODO Document AXA General Ingestion Process
+
+*** TODO Cleanup AXA database
