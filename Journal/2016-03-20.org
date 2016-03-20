@@ -1,0 +1,214 @@
+
+* <2016-03-20 Sun 10:44>
+
+---
+
+Is 14 and atom?
+
+Yes, because all numbers are atoms.
+
+---
+
+---
+
+Try to write the function +
+
+#+BEGIN_SRC scheme
+(define o+
+  (lambda (n m)
+    (cond
+      ((zero? m) n)
+      (else (add1 (o+ n (sub1 m)))))))
+
+#+END_SRC
+
+---
+
+---
+
+If /zero?/ is like /null?/ is /add1/ like /cons/?
+
+Yes! /cons/ builds lists and /add1/ builds numbers.
+
+---
+
+---
+
+Try to write the function -
+
+#+BEGIN_SRC scheme
+(define o-
+  (lambda (n m)
+    (cond
+      ((zero? m) n)
+      (else (sub1 (o- n (add1 m)))))))
+
+#+END_SRC
+
+---
+
+Is this a tup?
+(2 11 3 79 47 6)
+
+Yes: tup is short for tuple, it is also a list of numbers.
+
+---
+
+Is this a tup?
+(1 2 8 apple 4 3)
+
+No: it is just a list of atoms.
+
+---
+
+Is this a tup?
+(3 (74) 13 9)
+
+No, because it is not a list of numbers.
+(7 4) is not a number.
+
+---
+
+Is this a tup?
+()
+
+Yes, it is a list of zero numbers. This special case is the empty tup.
+
+---
+
+What is (addtup tup)
+where tup is (3 5 2 8)
+
+18.
+
+---
+
+What is the natural way to build numbers from a list?
+
+Use o+ in place of cons?: o+ builds numbers in the same way as cons builds lists.
+
+---
+
+The terminal condition for numbers is 0.
+The terminal condition for lists is (null? l).
+The terminal condition for tuples is (null? tup).
+When we build a number from a list of numbers, the terminal condition line should look like ((null? tup) 0)
+
+---
+
+*** The First Commandment (Revised)
+*When recurring on a list of atoms, lat, ask two questions about it: (null? lat) and else. When recurring on a number, n, ask two questions about it: (zero? n) and else.*
+
+---
+
+#+BEGIN_SRC scheme
+(define addtup
+  (lambda (tup)
+    (cond
+      ((null? tup) 0)
+      (else (+ (car tup) (addtup (cdr tup)))))))
+
+#+END_SRC
+
+This last line is very similar to our function /rember/ which was used to remove a member of the list.
+```(cons (car lat) (rember a (cdr lat)))```
+
+---
+
+*** The Fourth Commandment (Revised)
+*Always change at least one argument while recurring. It must be changed to be closer to termination. The changing argument must be tested in the termination condition: when using cdr, test terimination with null? and when using sub1, test termination with zero?*
+
+---
+
+Try to write the function x
+
+#+BEGIN_SRC scheme
+(define x
+  (lambda (n m)
+    (cond
+      ((zero? m) 0)
+      (else (+ n (x n (sub1 m)))))))
+
+#+END_SRC
+
+---
+
+*** The Fifth Commandment
+*When building a value with +, always use 0 for the value of the terminating line, for adding 0 does not change the value of an addition.*
+*When building a value with x, always use 1 for the value of the terminating line, for multiplying by 1 does not change the value of a multiplication.*
+*When building a value with cons, always consider () for the value of the terminating line.*
+
+---
+
+When recurring on one tup, ask two questions:
+1. (null? tup)
+2. else
+
+When recurring on two tups, ask two questions:
+1. (and (null? tup1) (null? tup2))
+2. ((null? tup1) tup2)
+3. ((null? tup2) tup1)
+4. else
+
+---
+
+Write the function tup+
+
+#+BEGIN_SRC scheme
+(define tup+
+  (lambda (tup1 tup2)
+    (cond
+      ((and (null? tup1) (null? tup2)) '())
+      (else (cons (+ (car tup1) (car tup2)) (tup+ (cdr tup1) (cdr tup2)))))))
+
+#+END_SRC
+
+---
+
+What is (tup+ tup1 tup2)
+where tup1 is (3 7 8 1)
+and tup2 is (4 6)
+
+No answer since tup2 will become null before tup1.
+Due to the First Commandment, we did not ask all of the necessary questions.
+
+#+BEGIN_SRC 
+(define tup+
+  (lambda (tup1 tup2)
+    (cond
+      ((and (null? tup1) (null? tup2)) '())
+      ((null? tup1) tup2)
+      ((null? tup2) tup1)
+      (else
+        (cons (+ (car tup1) (car tup2))
+              (tup+ (cdr tup1) (cdr tup2)))))))
+
+;; Write the function > using zero? and sub1?
+
+(define >
+  (lambda (n m)
+    (cond
+      ((zero? n) #f)
+      ((zero? m) #t)
+      (else (> (sub1 n) (sub1 m))))))
+
+(defing <
+  (lambda (n m)
+    (cond
+      ((zero? m) #f)
+      ((zero? n) #t)
+      (else (< (sub1 n) (sub1 m))))))
+
+SICP - infinite loop
+Y= (lambda (f)
+     ((lambda (x) (f (x x)))
+      (lambda (x) (f (x x))))
+
+(Y F) = ((lambda (x) (F (x x)))
+         (lambda (x) (F (x x))))
+      = (F ((lambda (x) (F (x x))) (lambda (x) (F (x x)))))
+      = (F (Y F))
+
+#+END_SRC
+
+Creeping featurism - disaster to have too many features.
