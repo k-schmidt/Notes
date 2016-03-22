@@ -1,0 +1,212 @@
+{:date "2016-03-22"
+:tags #{:littleschemer :Makefile :autotools :Autotools}}
+
+------
+
+<2016-03-22 Tue 07:19>
+
+*** TODO Finish Chapter 5 LS
+
+*** TODO Project Euler #11
+
+*** Checkup on AXA data
+
+*** Meet with OI people to collect placement/tech spec requirements
+
+*** The First Commandment (Final)
+*When recurring on a list of atoms, lat, ask two questions about it: (null? lat) and else.*
+*When recurring on a number, n, ask two questions about it: (zero? n) and else.*
+*When recurring on a list of S-expressions, l, ask three questions about it: (null? l, (atom? (car l)), and else.*
+
+*** The Fourth Commandment (Final)
+*Always change at least one argument while recurring.*
+*When recurring on a list of atoms, lat, use (cdr lat). When recurring on a number, n, use (sub1 n).*
+*And when recurring a a list of S-expressions, l, use (car l) and (cdr l) if neither (null? l) nor (atom? (car l)) are true.*
+*It must be changed to be closer to termination. The changing arguments must be tested in the termination condition:*
+*when using cdr, test termination with null?*
+*when using sub1, test termination with zero?*
+
+#+BEGIN_SRC scheme
+(define occur*
+  (lambda (a l)
+    (cond
+      ((null? l) '())
+      ((atom? (car l))
+       (cond
+         ((eq? (car l) old)
+           (add1 (occur* a (cdr l))))
+         (else (occur* a (cdr l)))))
+      (else
+        (+ (occur* a (car l))
+           (occur* a (cdr l)))))))
+
+(define subst*
+  (lambda (new old l)
+    (cond
+      ((null? l) '())
+      ((atom? (car l))
+       (cond
+         ((eq? (car l) old)
+           (cons new (subst* new old (cdr l))))
+         (else
+           (cons (car l) subst* new old (cdr l)))))
+      (else
+        (cons (subst* new old (car l))
+              (subst* new old (cdr l)))))))
+
+(define insertL*
+  (lambda (new old l)
+    (cond
+      ((null? l) '())
+      ((atom? (car l))
+       (cond
+         ((eq? (car l) old)
+           (cons new (cons old (insertL* new old (cdr l)))))
+         (else
+           (cons (car l) (insertL* new old (cdr l))))))
+      (else
+        (cons (insertL* new old (car l))
+              (insertL* new old (cdr l)))))))
+
+(define member*
+  (lambda (a l)
+    (cond
+      ((null? l) '())
+      ((atom? (car l))
+       (or (eq? (car l) a)
+         (member* a (cdr l)))))
+      (else (or (member* a (car l))
+              (member* a (cdr l))))))
+#+END_SRC
+
+*** Autotools
+
+Make - recipe that has targets
+Help you build and configure. Takes complexity out in order to help build systems.
+
+dos has their own build tool different than unix.
+Unix uses Make.
+Makefiles make your life easier but are not portable between distributions and linux systems due to dependencies on the kernel etc.
+
+deploys application into appropriate filesystem on computer.
+Make is not necessarily to compile C.
+You can do anything that you need a recipe for.
+
+
+Autoconf - understand deployment of your computer
+Automake - takes output of autoconf and makes a makefile
+maketool - GNU linking tool to allow automake to link all make files.
+
+#+BEGIN_SRC C
+include <stdio.h>
+int main(char **args)
+{
+printf("Hello, world!\n");
+return(0);
+}
+#+END_SRC
+
+Must be assembled to machine code to cpu.
+
+x.c -> assembly -> machine code -> CPM
+When you compile c code for it to run as windows (x.exe)
+
+You have to push it to assembly and then optimize the assembly into machine code.
+
+When it gets to machine code it is x.obj or x.o
+with stdio.o
+
+There is a linker between machine code and CPU.
+
+object files are basically assembly that have markers that tell the file to jump to a procedure.
+After you compile, each of the object codes are going to have their relative address inside of them.
+Particular address will point to a relative address.
+
+Static or dynamically link? Using LIBTOOL
+I can force x.exe to take shared library that exists already and bury it inside x.o and stdio.o (static)
+Dynamically linked with have pointers to a global pointer table to shared libraries.
+Shared libraries are more efficient and load libraries into memory.
+Specify that on the chained toolset.
+LIBTOOL will be instructed by the Make system on the linking and run autoconf.
+
+.pyc is machine code. It is compiled.
+
+Make already has variables already set.
+/usr/bin/make
+
+$@ :: name of a target
+
+-C :: change to directory without doing anything
+
+```$(MAKE) -C src $@```
+target Makefile inside src directory
+
+go to the target of all and use dependency.
+Jupiter has a dependency which is main.c
+What does main.c depend upon?
+It will rerun the file.
+```gcc -g -O0 -o $@ $+```
+
+$+ gets main.c
+-g is debug
+-o output
+$@ target
+$+ dependencies
+
+if you add a dependency that does not exist then it is an error.
+
+*** Launching a Kepler Program
+
+1. Client questionnaire / input document
+   1. Client to enunciate goals of the campaign
+   2. Requires client input
+   3. CS send to client
+   4. OI Review responses
+2. Campaign Brief
+   1. Ensure alignment
+3. Internal Kickoff meeting
+   1. Internal team alignment and brainstorm
+   2. CS: setup, plan, lead
+   3. OI: co-lead meeting/active participation in planning and ideas
+   4. CS: creates tactical framework document and prioritize partners/tactics based on discussion.
+   5. Update/add on-site pixels if needed.
+   6. Campaign brief will be initially uploaded KIP-Create
+      1. First time a document touches KIP-CREATE
+4. Asana Workflow
+   1. Manage campaign workflow
+   2. CSA to use template to activate all steps.
+5. Partner RFP and Negotiations
+   1. Mostly for direct buys
+   2. CS: Manages direct partners
+   3. Manages programmatic partners
+6. Media Plan
+   1. Outline all campaign details
+   2. CS: Create document and send to client
+   3. OI: Provide input before/during document creation and help with negotiations as needed
+7. Setup
+   1. Approve and sign publishers IOs
+      1. CS: Manages process and ensure timely approval.
+   2. Launch Specs
+      1. Detailed documentation and outline of all tactics
+      2. CS: Review launch specs and provide tactics
+      3. OI: Create launch specs
+   3. Ad Ops Brief
+      1. CS: Create brief
+      2. Analytics Brief
+         1. Provide context and request for MA team
+   4. Trafficking
+      1. Prepare all creative tagging
+      2. Setup should be standardized across the board soon.
+   5. Build/QA/Launch
+      1. Campaign Setup and Tag delivery
+      2. Direct - deliver tags to publishers and work directly to QA
+      3. Programmatic - build out based on launch specs and go through entire QA
+      4. CS: Traffic
+   6. Build out Datorama
+      1. Create relevant dashboards for reporting and opto
+   7. Campaign Project Management
+      1. Continuous management and innovation
+   8. Campaign Wrap-Up Document
+      1. Review of campaign performace
+      2. CS: Create document and send to client
+      3. OI: Provide input and insightsLL
