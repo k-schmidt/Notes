@@ -1,0 +1,29 @@
+#{:date "2016-03-24" :tags #{:htdp}
+
+------
+
+1. Formulate auxiliary function definitions for every dependency between quantities mentioned in the problem statement or discovered with example calculations.
+2. Give names to frequently used constants and use the names instead of the constants in programs.
+
+Message Passing - what is it?
+Message passing simply means that (at a very abstract level) the fundamental mechanism of program execution is objects sending each other messages.
+The important point is that the name and structure of these messages is not necessarily fixed beforehand in the source code and can itself be additional information.
+This is an important part of what Alan Kay originally envisioned as "OOP".
+
+Languages that implement "real" message passing often have method definitions too, as a convenient way to implement message handlers, but allow classes to implement more flexible message handlers that enable the object to receive "method calls" with arbitrary names (not fixed at compile time).
+
+Scheme's classes of atomic data are not enough to represent information.
+If we discover that an object has /N/ properties, we introduce a structure definition with /N/ fields and supply a data definition that specifies what kind of data the fields may contain.
+
+Let us consider functions that process student records at a school. If a student's interesting properties for a school are:
+1. First name
+2. Last name
+3. Name of home-room teacher
+
+Then we should represent information about a student as a structure:
+
+#+BEGIN_SRC scheme
+(define-struct student (last first teacher))
+
+#+END_SRC
+
