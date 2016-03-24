@@ -26,4 +26,3 @@ Then we should represent information about a student as a structure:
 (define-struct student (last first teacher))
 
 #+END_SRC
-
