@@ -1,0 +1,93 @@
+#{:date "2016-03-25" :tags #{:littleschemer}
+
+------
+
+*** Chapter 6
+
+#+BEGIN_SRC scheme
+(define numbered?
+  (lambda (aexp)
+    (cond
+      ((atom? aexp) (number? aexp))
+      ((eq? (car (cdr aexp)) '+)
+       (and (numbered? (car aexp))
+         (numbered?
+           (car (cdr (cdr aexp))))))
+      ((eq? (car (cdr aexp)) 'x)
+       (and (numbered? (car aexp))
+            (numbered? (car (cdr (cdr aexp))))))
+      ((eq? (car (cdr a exp)) '^)
+       (and (numbered? (car aexp))
+            (numbered? (car (cdr (cdr aexp)))))))))
+
+(define numbered?
+  (lambda (aexp)
+    (cond
+      ((atom? aexp) (number? aexp))
+      (else
+        (and (numbered? (car aexp))
+             (numbered? (car (cdr (cdr aexp)))))))))
+#+END_SRC
+
+*** The Seventh Commandment
+*Recur on the subparts that are of the same nature:*
+*On the sublists of a list.*
+*On the subexpressions of an arithmetic expression.*
+
+#+BEGIN_SRC scheme
+(define value
+  (lambda (nexp)
+    (cond
+      ((atom? nexp) nexp)
+      ((eq? (cadr nexp)) '+)
+       (+ (value (car nexp))
+          (value (caddr nexp)))))
+      ((eq? (cadr nexp) 'x)
+       (x (value (car nexp))
+          (value (caddr nexp))))
+      (else
+        (^ (value (car nexp))
+           (value (caddr nexp)))))))
+#+END_SRC
+
+Try to write a function /value/ for a new kind of arithmetic expression that is either:
++ a number
++ a list of the atom + followed by two arithmetic expressions
++ a list of the atom x followed by two arithmetic expressions
++ a list of the atom ^ followed by two arithmetic expressions
+
+#+BEGIN_SRC scheme
+;; incorrect - does (+ 1 3) pass the atom? test
+(define value
+  (lambda (nexp)
+    (cond
+      ((atom? nexp) nexp)
+      ((eq? (car nexp) '+)
+       (+ (value (cdr nexp))
+          (value (cddr nexp))))
+      ((eq? (car nexp) 'x)
+       (x (value (cdr nexp))
+          (value (cddr nexp))))
+      (else
+        (^ (value (cdr nexp))
+           (value (cddr nexp)))))))
+
+(define 1st-sub-exp
+  (lambda (aexp)
+    (cond
+      (else (cadr aexp)))))
+
+(define 1st-sub-exp
+  (lambda (aexp)
+    (cadr aexp)))
+
+(define 2nd-sub-exp
+  (lambda (aexp)
+    (caddr aexp)))
+
+(define operator
+  (lambda (aexp)
+    (car aexp)))
+
+#+END_SRC
+
