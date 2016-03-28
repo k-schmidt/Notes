@@ -1,0 +1,64 @@
+#{:date "2016-03-28" :tags #{:bash}}
+
+------
+
+* <2016-03-28 Mon 10:27>
+
+** Linux/Bash Cheat Sheet
+
+| alt+f2 | opens a command launcher |
+| shift+del | permanently deletes a file without sending it to the Trash |
+| ctrl+alt+l | locks the screen |
+
+** Maintain Sessions in Database
+
+*** Thoughts
+When someone logs on, encrypt their access token and store it in the database.
+  + How?
+    + API?
+The database will also hold the tiles that an access token is allowed to view as well as the files that that token has previously uploaded to the website.
+
+*** Initial Notes
+Create query before executing in order to prevent SQL injection.
+On heavily loaded websites, it makes sense to have a custom database backend so to leverage web server load balancing.
+
+#+BEGIN_SRC MySQL
+CREATE TABLE PHPSESSION(
+  session_id varchar(50) NOT NULL,
+  session_variable text,
+  last_accessed decimal(15,3) NOT NULL,
+  PRIMARY KEY (session_id),
+  KEY last_acc (last_accessed))
+type=MyISAM;
+
+#+END_SRC
+
+Delete session id upon logout.
+
+HTTP protocol is used by web browsers to request resources from web servers, and for web servers to return responses.
+
+When to use a DBMS
+  + There is more than one user who needs to access the data at the same time.
+  + There is at least a moderate amount of data. For example, we may need to maintain information about a few hundred customers.
+  + There are relationships between the stored data items. For example, customers may have any number of related purchase orders.
+  + There is more than one kind of data record.
+  + There are constraints that must be rigidly enforced on the data, such as field lengths, field types, uniqueness of customer numbers, and so on.
+  + New or consolidated information must be produced from basic, related information.
+  + There is a large amount of data that must be searched quickly.
+  + Security is important.
+  + Adding, deleting, or modifying data is a complex process.
+
+The difference between MySQL and other systems is that MySQL is missing some querying support and has limited concurrency-handling abilities.
+
+**** SQL Components
+1. Data Definition Language (DDL)
+   1. DDL is the set of SQL commands that create and delete a database, add and remove tables, create indexes, and modify each of these.
+2. Data Manipulation Language (DML)
+   1. DML is the set of SQL commands that work with a DBMS and a database.
+3. Transaction Management
+   1. SQL includes commands for treating a set of commands as a unit, or transaction.
+4. Advanced Features
+   1. DML and DDL include advanced features for embedding SQL into general-purpose programming languages and defining special-purpose views of the underlying data, and granting and removing access rights to the DBMS and databases.
+
+
+AWS DynamoDB is particularly good at managing state.
