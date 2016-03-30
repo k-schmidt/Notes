@@ -1,0 +1,102 @@
+#{:date "2016-03-30" :tags #{:linux}}
+
+------
+
+<2016-03-30 Wed 17:16>
+
+* How Linux Works
+
+#+BEGIN_SRC bash
+# displays the contents of the /etc/passwd system information file and returns your shell prompt
+cat /etc/passwd
+cat file1 file2 ...
+# prints the contents of file1, file2, and any other files that you specify and then exits.
+
+ls -l # detailed (long) listing
+ls -F # display file type information
+
+grep -i # case-insensitive
+grep -v # prints all lines that dont match
+
+grep ie /usr/share/dict/words | less
+
+diff file1 file2 # to see differences between two files
+
+file file # to see a file and are unsure of its format
+
+find dir -name file -print # find file in a directory
+
+passwd # change your password
+#+END_SRC
+
+| *Keystroke* | *Action* |
+| C-b | Move the cursor left |
+| C-f | Move the cursor right |
+| C-p | View the previous command |
+| C-n | View the next command (or move the cursor down) |
+| C-a | Move the cursor to the beginning of the line |
+| C-e | Move the cursor to the end of the line |
+| C-w | Erase the preceding word |
+| C-u | Erase from cursor to beginning of line |
+| C-k | Erase from cursor to end of line |
+| C-y | Paste erased text |
+
+#+BEGIN_SRC bash
+# to search for a manual page by keyword, use the -k option:
+man -k keyword
+
+# to send the output of command to a file instead of the terminal
+command > file
+
+# append the output to the file instead of overwriting it
+command >> file
+
+# redirect the standard error
+ls /ffffffffff > f 2> e
+
+# you can also send the standard error to the same place as stdout
+ls /fffffffffffff > f 2>&1
+
+# to channel a file to a program's standard input
+head < /proc/cpuinfo
+
+ps x # show all of your running processes
+ps ax # show all processes on the system, not just the ones you own.
+ps u # include more detailed information on processes
+ps w # show full command names, not just what fits on one line
+
+# detach a process from the shell and put it in the "background" with the & ampersand
+
+tar cvf archive.tar file1 file2 ... # create tar file
+tar xvf archive.tar # extract tar file
+
+gunzip file.tar.gz # unzip gzip
+#+END_SRC
+
++ /bin contains ready to run programs (executables)
++ /dev contains device files
++ /etc contains the user password, boot, device, networking, and other setup files.
++ /home contains personal directories for regular users
++ /lib holds library files containing code that executables can use.
++ /proc provides system statistics through browsable directory-and-file interface.
++ /sys provides device and system interface.
++ /sbin system executables that relate to system management
++ /tmp storage area for smaller, temporary files that you don't care much about.
++ /usr contains a large directory hierarchy including the bulk of the Linux system.
++ /var variable subdirectory, where programs record runtime information.
+
++ /boot contains kernel boot loader files.
++ /media a base attachment for removable media such as flash drives that is found in many distributions.
++ /opt may contain additional third-party software
+
++ /include holds header files used by the C compiler
++ /info contains GNU info manuals
++ /local where administrators can install their own software.
++ /man contains manual pages
++ /share contains files that should work on other kinds of Unix machines with no loss of functionality
+
+
+On Linux systems, the kernel is normally in /vmlinuz or /boot/vmlinuz. A boot loader loads this file into memory and sets it in motion when the system boots.
+
+
+Configure the privileged users in your /etc/sudoers file.
