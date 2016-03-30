@@ -1,0 +1,78 @@
+#:{date "2016-03-29" tags #{HAR}
+
+------
+
+* <2016-03-29 Tue 11:06>
+
+#+BEGIN_SRC python
+import itertools
+itertools.chain(*iterables)
+
+# Equivalent to:
+def chain(*iterables):
+    # chain('ABC', 'DEF') --> A B C D E F
+    for it in iterables:
+        for element in it:
+            yield element
+#+END_SRC
+
+*** TDD
+Set time per week for testing.
+Sam: Writing tests that are truly useful is not easy.
+Jeff: Most test out there is not testable so you have to train your code to be testable.
+
+Jeff: Advised to start BDD/TDD on our own projects... it will develop the right types of habits first so that you right proper code _the first time_.
+
+*** Client Database
+Use relational database
+http is stateless
+on every request you need some way of maintaining session in the browser.
+Usually done between the browser and the application server.
+Cookie is usually the most viable solution.
+
+Have cookie just store a unique id and pass it back and forth to the app server.
+
+Persistent store in a relational database and have the application be completely stateless.
+If it needs information, it will go back to the persistent store in order to get it.
+
+Much easier to scale application servers if they are stateless.
+
+Session affinity in the load balancer.
+If information is stored in memory.
+
+Multiple concurrent requests for load balancing.
+If one web server goes down then a persistent database will save your state so that the current users can switch over to the other load balanced web server.
+
+1. change the way Flask manages sessions.
+2. use sqlalchemy
+
+has to be a team decision so that everything is routed through sqlalchemy.
+
+if redis crashes, how do you retrieve 
+
+Use persitent redis store and use RabbitMQ to manage the queue.
+
+*** [[http://imar.spaanjaars.com/414/storing-uploaded-files-in-a-database-or-in-the-file-system-with-aspnet-20][File System vs. Database]]
+**** File System Advantages
++ Very easy to do.
++ Files on disk are very easy to backup.
+  + Easier to do incremental backups.
+
+**** File System Disadvantages
++ Loosely coupled nature of the files on disk.
++ No string relation with a record in the database.
++ To store uploaded files on disk, your web server needs permission to write to the file system. This is easy to come by when you run your own server, but may prove to be more problematic in an ISP scenario.
+
+**** Database Advantages
++ Files are easy to relate to other records.
+  + They can be retrieved in JOIN style queries, and even deleted automatically with cascading delete turned on.
+  + Don't need additional permissions on the server.
++ Data is contained in a single location.
+
+**** Database Disadvantages
++ *Slow*
++ lack of easy access to the files.
++ Whenever you make a full backup of your database, /all/ the files are included, whether they have been changed or not.
++ With a file based solution, you can use a diff programs that can determine which files have been changed since the last backup, and only download those
+
+
