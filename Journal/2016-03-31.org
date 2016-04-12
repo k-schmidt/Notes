@@ -1,0 +1,52 @@
+#{:date "2016-03-31" :tags #{:architecture :JWT}}
+
+------
+
+* 2016-03-31
+
+** Platform Architecture Meeting
+
+*** Attendees
++ Nathan
++ Rupesh
++ Byron
++ Kyle
++ Sam
++ David
+
+*** Initial Notes
++ Login Problems
+  + Too many places where they have to login.
+  + Need to get everything together so that the users can see it all in one place.
++ Separate servers with separate DNS are easy to maintain.
++ How do we start to bring everything together?
+  + Layout basic requirements for the look and feel.
+    + Example: The workbench design looks like the KIP-Create design etc.
+
+*** JWT Tracking Sessions
+The traditional mode of authentication for websites has been to use cookie based authentication. In a typical REST architecture the server does not keep any client state.
+We can secure our REST API with JSON Web Tokens (JWTs). JWTs are an open industry standard method for representing claims securely between two parties.
+
+
+With JWTs you plug your token into an authentication system and get access to restricted data that belongs to you.
+
+
++ Store the token in the browser's localstorage or sessionstorage.
++ To logout you just remove the token.
+  + Tokens are not persisted in the database so you don't have to query a session store for anything when authenticating.
+
+*** Structure of a JWT
+There are three parts separated by a period.
++ header
++ payload
++ signature
+
+**** Advantages
++ JWT approach allows us to make AJAX calls to any server or domain.
++ There is no need for having a separate session store on the server. JWT itself conveys the entire information.
++ Server Side reduces to just an API and static assets (HTML, CSS, JS) can be served via a CDN.
++ The authentication system is mobile ready, the token can be generated on any device.
++ Since we have eliminated the need for cookies, we no more need to protect against the cross site requests.
++ API Keys provide either-or solution, whereas JWT provide much granular control, which can be inspected for any debugging purpose.
++ API Keys depend on a central storage and a service. JWT can be self-issued or an external service can issue it with allowed scopes and expiration.
+

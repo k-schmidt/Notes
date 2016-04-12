@@ -1,0 +1,218 @@
+* <2016-04-12 Tue>                       :Javascript Python MySQL Algorithms:
+
+** DONE New Unique Prospects List
+
+** TODO User Authentication Database
++ Made a commit of a working API
+
+*** TODO Work on Database Creation and Migration
+
+** TODO Coursera Course
+
+** TODO Read
++ /ternary operations/
+#+BEGIN_SRC javascript
+console.log(true ? 1 : 2);
+// > 1
+console.log(false ? 1 : 2);
+// > 2
+#+END_SRC
+
++ /null/ and /undefined/ are the absence of a meaningful value.
+
+*** Automatic Type Conversion
+#+BEGIN_SRC javascript
+console.log(8 * null)
+// > 0
+console.log("5" - 1)
+// > 4
+console.log("5" + 1)
+// > 51
+console.log("five" * 2)
+// > NaN
+console.log(false == 0)
+// > true
+
+console.log(null == undefined);
+// > true
+console.log(null == 0);
+// > false
+
+// For converting strings and numbers to Boolean values state that 0, NaN, and the empty string ("") count as false
+console.log(0 == false);
+// > true
+console.log("" == false);
+// > true
+
+// For cases like this where you do not want any automatic conversions to happen
+console.log("" === false);
+// > true
+#+END_SRC
+
+*** Short-Circuiting of Logical Operators
++ This functionality allows the || operator to be used as a way to fall back on a default value.
++ The && operator works similarly but the other way around.
++ Another import property of these two operators is that the expression to their right is evaluated only when necessary.
+  + /short-circuit evaluation/
+#+BEGIN_SRC javascript
+// like the ternary operation in the first example
+console.log(null || "user")
+// > user
+console.log("Karl" || "user")
+// > Karl
+#+END_SRC
+
+*** Program Structure
+
+**** Expressions and Statements
++ The simplest kind of statement is an expression with a semicolon after it.
+
+**** Variables
++ To catch and hole values, JavaScript provides a thing called a /variable/.
++ Variables as tentacles.
+  + They do not /contain/ values; they /grasp/ them - two variables can refer to the same value.
+
+#+BEGIN_SRC javascript
+var caught = 5 * 5;
+// the special word (keyword) var indicates that this sentence is going to define a variable.
+// After a variable has been defined, its name can be used as an expression.
+var ten = 10;
+console.log(ten * ten);
+// > 100
+
+var mood = "light";
+console.log(mood);
+// > light
+
+mood = "dark";
+console.log(mood);
+// > dark
+#+END_SRC
+
+**** Functions
++ Executing a function is called /invoking/, /calling/, or /applying/ it.
++ Call a function by putting parentheses after an expression that produces a function value.
+
+***** Prompt and Confirm
++ You can ask the user an OK/Cancel question using /confirm/. This returns Boolean: true if the user clicks OK and false if the user clicks Cancel.
++ The prompt function can be used to ask an "open" question.
+  + The first argument is the question, the second one is the text that the user starts with.
++ Both functions are not used much in modern web programming because you have no control over the way the resulting windows look.
+
+**** Control Flow
++ Top to Bottom
+
+**** Conditional Execution
++ Written using the /if/ keyword in JavaScript.
+
+#+BEGIN_SRC javascript
+var theNumber = prompt("Pick a number", "");
+if (!isNaN(theNumber))
+  alert("Your number is the square root of " + theNumber * theNumber);
+
+var theNumber = Number(prompt("Pick a number", ""));
+if (!isNaN(theNumber))
+  alert("Your number is the square root of " + theNumber * theNumber);
+else
+  alert("Hey. Why didn't you give me a number?");
+
+// more than two paths
+var num = Number(prompt("Pick a number", "0"));
+
+if (num < 10)
+  alert("Small");
+else if (num < 100)
+  alert("Medium");
+else
+  alert("Large");
+#+END_SRC
+
+***** While and Do Loops
+#+BEGIN_SRC javascript
+var number = 0;
+while (number <= 12) {
+  console.log(number);
+  number = number + 2;
+}
+
+#+END_SRC
+
++ Whenever we need to execute multiple statements inside a loop, we wrap them in braces, { and }.
++ Braces do for statements what parentheses do for expressions; they group them together, making them count as a single statement.
++ A sequence of statements wrapped in braces is called a /block/.
++ Many JS programmers wrap every single loop or if body in braces.
+
++ The /do/ loop is a control structure similar to the /while/ loop.
+  + a do loop always executes its body at least once, and it starts testing whether it should stop only after that first execution.
+
+#+BEGIN_SRC javascript
+do {
+  var name = prompt("Who are you?");
+} while (!name);
+console.log(name);
+#+END_SRC
+
+***** for Loops
++ The "state" of the loop are now grouped together.
++ The parentheses after a /for/ keyword must contain two semicolons.
+  + The part before the semicolon /initializes/ the loop, usually by defining a variable.
+  + The second part is the expression that /checks/ whether the loop must continue.
+  + The final part /updates/ the state of the loop after every iteration.
+#+BEGIN_SRC javascript
+for (var number = 0; number <= 12; number = number + 2)
+  console.log(number);
+
+var result = 1;
+for (var counter = 0; counter < 10; counter = counter + 1)
+  result = result * 2;
+console.log(result);
+// > 1024
+#+END_SRC
+
+***** Breaking Out of a Loop
++ Immediately jump out of a loop.
+
+#+BEGIN_SRC javascript
+for (var current = 20; ; current++) {
+  if (current % 7 == 0)
+    break;
+}
+console.log(current);
+// > 21
+#+END_SRC
+
++ In the above example, the /for/ construct does not have a part that checks for the end of the loop.
++ The /continue/ keyword is similar to /break/, in that it influences the progress of a loop.
+  + When /continue/ is encountered in a loop body, control jumps out of the body and continues with the loop's next iteration.
+
+***** Updating Variables Succinctly
+#+BEGIN_SRC javascript
+count += 1;
+
+for (var number = 0; number <= 12; number += 2)
+  console.log(number);
+
+#+END_SRC
+
+***** Dispatching on a Value with Switch
+#+BEGIN_SRC javascript
+switch (prompt("What is the weather like?")) {
+  case "rainy":
+    console.log("Remember to bring an umbrella.");
+    break;
+  case "sunny":
+    console.log("Dress lightly.");
+  case "cloudy":
+    console.log("Go outside.");
+    break;
+  default:
+    console.log("Unknown weather type!");
+    break;
+}
+
+// sunny will also execute cloudy until it reaches a break.
+
+#+END_SRC
+
+***** Capitalization
++ Capitalize every word except the first

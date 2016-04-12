@@ -1,0 +1,18 @@
+#{:date "2016-04-05" :tags #{:notes}}
+
+------
+
+* 2016-04-05
+*** Design Review Notes <2016-04-05 Tue 11:05>
+**** Facebook
++ xvfb
+  + or X virtual framebuffer
+  + is a display server implementing the X11 display server protocol.
+  + In contrast to other display servers, xvfb performs all graphical operations in memory without showing any screen output.
++ When you want a class to be _private_, create a function using that class to show and document how the class is used.
+  + [[https://github.com/KeplerGroup/KIP-Facebook/blob/master/src/python/pkg/ggutils/__init__.py][reference]]
++ Use a type of dictionary for key/values that are going to be added and subtracted
+  + Ordered dict is a good choice for files
+  + [[https://github.com/KeplerGroup/KIP-Facebook/blob/master/src/python/pkg/pdutils/column_names.py][reference]]
+  + [[https://github.com/KeplerGroup/KIP-Facebook/blob/master/src/python/pkg/pdutils/ordered_dict_with_attributes.py][rewrite dictionary]]
+

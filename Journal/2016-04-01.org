@@ -1,0 +1,88 @@
+{:date "2016-04-01" :tags #{:linux}}
+
+------
+
+* 2016-04-01
+
+** How Linux Works
+
+*** Devices
+
+**** Device Files
++ Device Files are located in the /dev directory
+```ls -l```
++ If the first character of each line is b, c, p, or s, the file is a device.
+  + block
+  + character
+  + pipe
+  + socket
+
+***** Block Device
++ Programs access data from a block device in fixed chunks
++ Because block device's total size is fixed and easy to index, processes have random access to any block in the device with the help of the kernel.
+
+***** Character Device
++ Data streams.
++ Don't have size; when you read from or write to one, the kernel usually performs a read or write operation on the device.
++ Printers connected to your computer are Character Devices.
++ The kernel cannot back up and reexamine the data stream after it has passed data to a device or process.
+
+***** Pipe Device
++ Named pipes are like character devices, with another process at the other end of the I/O stream instead of a kernel driver.
+
+***** Socket Device
++ Sockets are special-purpose interfaces that are frequently used for interprocess communication.
+
+The numbers before the dates in the ```ls -l``` command within the /dev directory are the major and minor device numbers that help the kernel identify the device.
+
+**** sysfs Device Path
+The name of the device in /dev tells you a little about the device, but not a lot.
+Another problem is that the kernel assigns devices in the order in which they are found, so a device may have a different name between reboots.
+
+Instead, the kernel offers the sysfs interface through a system of files and directories. The base path for devices is /sys/devices.
+/dev file is there so that user processes can use the device, whereas the /sys/devices path is used to view information and manage the device.
+
+**** dd and Devices
+```dd```
++ function to read from an input file or stream and write to an output file or stream, possbily doing some encoding conversion on the way.
++ dd copies data in blocks of a fixed size.
+
+#+BEGIN_SRC bash
+dd if=/dev/zero of=new_file bs=1024 count=1
+# if=file, the input file
+# of=file, the output file
+# bs=size, block size
+# ibs=size, obs=size, the input and output block sizes
+# count=num, the total number of blocks to copy, copy a piece from a large file or device
+# skip=
+# num, skip past the first num blocks in the input file or stream and do not copy them to the output.
+#+END_SRC
+
+*** Device Name Summary
++ query ```udevd``` using ```udevadm```
++ look for the device in the /sys directory
++ guess the name from the output of the ```dmesg``` command or the kernel system log file.
++ for a disk device that is already visible to the system, you can check the output of the ```mount``` command.
++ run ```cat /proc/devices``` to see the block and character devices for which your system currently has drivers.
+
+**** Hard Disks: /dev/sd*
++ Most hard disks attached to current Linux systems correspond to device names with an sd prefix, such as /dev/sda, /dev/sdb.
+  + These are partitions on a disk.
+  + sd = SCSI disk.
+    + Small Computer System Interface
+
+**** CD and DVD Drives: /dev/sr*
+
+**** PATA Hard Disks: /dev/hd*
++ fixed assignments base on the master and slave devices on interfaces 0 and 1.
+
+**** Terminals: /dev/tty*, /dev/pts/*, and /dev/tty
++ devices for moving characters between a user process and an I/O device, usually for text output to a terminal screen.
++ Pseudoterminal
+  + devices are emulated terminals that understand the I/O features of real terminals.
++ /dev/tty1
+  + first virtual console
++ /dev/pts/0
+  + first pseudoterminal device.
++ /dev/tty
+  + the controlling terminal of the current process.

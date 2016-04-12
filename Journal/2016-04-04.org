@@ -1,0 +1,27 @@
+#{:date "2016-04-04" :tags #{}}
+
+------
+* 2016-04-04
+
+*** TODO Experiment with JWT and User DB
+
+*** TODO Get AXA Table Prepped for Ingestion
+
+*** TODO Algorithms Class
+
+** What Matters Most To You?
++ Health
++ Family/Girlfriend
++ Programming
++ Community
+
++ Live a life that is driven more strongly by curiosity than by fear.
+
+Work with stubbornness.
+Work with it as openly and trustingly and diligently as you can.
+Work with all your heart, because - I promise - if you show up for your work day after day after day after day, you just might get lucky enough some random morning to burst right into bloom.
+
+
+Speak to your darkest and most negative interior voices the way a hostage negotiator speaks to a violent psychopath: calmy, but firmly.
+Most of all, never back down. You cannot afford to back down. The life you are negotiating to save, after all, is your own.
+
