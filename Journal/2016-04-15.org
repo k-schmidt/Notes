@@ -1,0 +1,175 @@
+* 2016-04-15                                                     :javascript:
+** DONE Reimbursement
+** TODO Placement Names Discussion
+** TODO Security for Login Credentials
+** TODO Report Sling Collision Analysis
+
+** TODO Coursera
+
+** TODO JS
+
+** DONE Python Koans
+
+*** Objects
+Braces have /two/ meanings in JavaScript
++ At the start of a statement, they start a block of statements
++ In any other position, they describe an object.
+
+Similar to variable bindings, property bindings /grasp/ values.
+
+*** Mutability
+#+BEGIN_SRC javascript
+var object1 = {value: 10};
+var object2 = object1;
+var object3 = {value: 10};
+
+console.log(object1 == object2);
+// > true
+
+console.log(object1 == object3);
+// > false
+
+object1.value = 15;
+console.log(object2.value);
+// > 15
+console.log(object3.value);
+// > 10
+
+#+END_SRC
+
+The object1 and object2 variables grasp the /same/ object, which is why changing object1 also changes the value of object2.
+
+*** Journal
+#+BEGIN_SRC javascript
+var journal = [];
+
+function addEntry(events, didITurnIntoASquirrel) {
+  journal.push({
+    events: events,
+    squirrel: didITurnIntoASquirrel
+  });
+}
+
+addEntry(["work", "touched tree", "pizza", "running", "television"], false);
+addEntry(["work", "ice cream", "cauliflower", "lasagna", "touched tree", "brushed teeth"], false);
+addEntry(["weekend", "cycling", "break", "peanuts", "beer"], true);
+
+#+END_SRC
+
+*** Objects as Maps
+#+BEGIN_SRC javascript
+var map = {};
+function StorePhi(event, phi) {
+  map[event] = phi;
+}
+
+storePhi("pizza", 0.069);
+storePhi("touched true", -0.081);
+console.log("pizza" in map);
+// > true
+console.log(map["touched tree"]);
+// > -0.081
+
+#+END_SRC
+
+A /map/ is a way to go from values in one domain (in this case, event names) to corresponding values in another domain.
+
+#+BEGIN_SRC javascript
+// Looping through properties of an object.
+for (var event in map)
+  console.log("The correlation for '" + event + "' is " + map[event]);
+// > The correlation for 'pizza' is 0.069
+// > The correlation for 'touched tree' is -0.081
+
+#+END_SRC
+
+*** Further Arrayology
+#+BEGIN_SRC javascript
+var todolist = [];
+// Add to end of list
+function rememberTo(task) {
+  todoList.push(task);
+}
+
+// Pull first item from list
+function whatIsNext() {
+  return todoList.shift();
+}
+
+// Push item to first position of list
+function urgentlyRememberTo(task) {
+  todoList.unshift(task);
+}
+
+console.log([1, 2, 3, 2, 1].indexOf(2));
+// > 1
+console.log([1, 2, 3, 2, 1].lastIndexOf(2));
+// > 3
+
+console.log([1, 2, 3, 2, 1].slice(2, 4));
+// > [3, 4]
+console.log([1, 2, 3, 4, 5].slice(2));
+// > [2, 3, 4]
+
+// slice and indexOf work on strings as well
+var myString = "Fido";
+myString.myProperty = "value"; // No error here
+console.log(myString.myProperty);
+// > undefined
+
+console.log("coconuts".slice(4, 7));
+// > nut
+console.log("coconut".indexOf("u"));
+// > 5
+
+console.log("one two three".indexOf("ee"));
+// > 11
+
+console.log(" okay \n ".trim());
+// > okay
+
+var string = "abc";
+console.log(string.length);
+// > 3
+console.log(string.charAt(0));
+// > a
+console.log(string[1]);
+// > b
+#+END_SRC
+
+*** The arguments Object
+#+BEGIN_SRC javascript
+// JavaScript functions have multi-arity by default but a function will only use what it needs from the provided arguments
+function noArguments() {}
+noArguments(1, 2, 3); // This is okay
+function threeArguments(a, b, c) {}
+threeArguments(); // And so is this
+
+function argumentCounter() {
+  console.log("You gave me", arguments.length, "arguments.");
+}
+argumentCounter("Straw man", "Tautology", "Ad hominem");
+// > You gave me 3 arguments.
+#+END_SRC
+
+JavaScript does not warn you if you are about to overwrite a name that is already taken.
+
+*** Exercises
+#+BEGIN_SRC javascript
+function range(n, m, step=1) {
+  var l = [];
+  while (n > m) {
+    l.push(n);
+    n += step;
+  };
+  return l;
+}
+
+function sum(ranj) {
+  var s = 0;
+  for (var i = 0, size = ranj.length; i < size; i++) {
+    s += ranj[i];
+  };
+  return s;
+}
+#+END_SRC

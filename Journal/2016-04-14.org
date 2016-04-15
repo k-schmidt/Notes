@@ -1,0 +1,278 @@
+* <2016-04-14 Thu>                                  :javascript python mysql:
+** Defining a Function
+#+BEGIN_SRC javascript
+var square = function(x) {
+  return x * x;
+};
+
+console.log(square(12))
+// > 144
+
+var makeNoise = function() {
+  console.log("Pling!");
+};
+
+makeNoise();
+// > Pling!
+
+var power = function(base, exponent) {
+  var result = 1;
+  for (var count = 0; count < exponent; count++)
+    result *= base;
+  return result;
+};
+
+console.log(power(2,10));
+// > 1024
+
+// Declares the variable as local, only changes the local variable
+var x = "outside";
+
+var f1 = function() {
+  var x = "inside f1";
+};
+f1();
+console.log(x);
+// > "outside"
+
+// Changes the global variable, x.
+var f2 = function() {
+  x = "inside f2";
+};
+f2();
+console.log(x);
+// > inside f2
+#+END_SRC
+
+** Nested Scopes
++ Functions can be created inside other functions, producting several degrees of locality.
+
+#+BEGIN_SRC javascript
+var landscape = function() {
+  var result = "";
+  var flat = function(size) {
+    for (var count = 0; count < size; count++)
+      result += "_";
+  };
+  var mountain = function(size) {
+    result += "/";
+    for (var count = 0; count < size; count ++)
+      result += "'";
+    result += "\\";
+  };
+
+  flat(3);
+  mountain(4);
+  flat(6);
+  mountain(1);
+  flat(1);
+  return result;
+};
+
+console.log(landscape());
+// > ___/''''\______/'\_
+
+#+END_SRC
+
+** Functions as Values
+#+BEGIN_SRC javascript
+var launchMissiles = function(value) {
+  missileSystem.launch("now");
+};
+if (safeMode)
+  launchMissiles = function(value) {/* do nothing */};
+#+END_SRC
+
+** Declaration Notation
+#+BEGIN_SRC javascript
+/* function declaration.
+The statement defines the variable square and points it at the given function
+*/
+console.log("The future says:", future());
+
+function future() {
+  return "We STILL have no flying cars.";
+}
+
+// If you want your programs to behave consistently, only use this form of function-defining statements in the outermost block of a function or program.
+
+function example() {
+  function a() {} // Okay
+  if (something) {
+    function b() {} // DANGER!!
+  }
+};
+#+END_SRC
+
+** The Call Stack
+#+BEGIN_SRC javascript
+function greet(who) {
+  console.log("Hello " + who);
+}
+greet("Harry");
+console.log("Bye");
+
+#+END_SRC
+
++ The place where the computer stores this context is the /call stack/.
+
+** Optional Arguments
+#+BEGIN_SRC javascript
+alert("Hello", "Good Evening", "How do you do?");
+
+#+END_SRC
+
++ If you pass too many arguments to a function, the extra ones are ignored.
++ If you pass too few, the missing parameters simply get assigned the value /undefined/.
+
+#+BEGIN_SRC javascript
+function power(base, exponent) {
+  if (exponent == undefined)
+    exponent = 2;
+  var result = 1;
+  for (var count = 0; count < exponent; count++)
+    result *= base;
+  return result;
+}
+
+console.log(power(4));
+// > 16
+
+console.log(power(4, 3));
+// > 64
+#+END_SRC
+
+** Closure
+
+#+BEGIN_SRC javascript
+function wrapValue(n) {
+  var localVariable = n;
+  return function() { return localVariable; };
+}
+var wrap1 = wrapValue(1);
+var wrap2 = wrapValue(2);
+console.log(wrap1());
+// > 1
+console.log(wrap2());
+// > 2
+
+#+END_SRC
+
++ Being able to reference a specific instance of local variables in an enclosing function is called /closure/.
++ A function that "closes over" some local variables is called a closure.
+
+#+BEGIN_SRC javascript
+function multiplier(factor) {
+  return function(number) {
+    return number * factor;
+  };
+};
+
+var twice = multiplier(2);
+console.log(twice(5));
+// > 10
+#+END_SRC
+
++ A good mental model is to think of the /function/ keyword as "freezing" the code in its body and wrapping it into a package (the function value).
+
+** Recursion
++ Do no overflow the stack.
+
+#+BEGIN_SRC javascript
+function power(base, exponent) {
+  if (exponent == 0)
+    return 1;
+  else
+    return base * power(base, exponent - 1);
+}
+
+console.log(power(2, 3));
+// > 8
+
+#+END_SRC
+
+** Growing Functions
+#+BEGIN_SRC javascript
+function printZeroPaddedWithLabel(number, label) {
+  var numberString = String(number);
+  while (numberString.length < 3)
+    numberString = "0" + numberString;
+  console.log(numberString + " " + label);
+}
+
+function printFarmInventory(cows, chickens, pigs) {
+  printZeroPaddedWithLabel(cows, "Cows");
+  printZeroPaddedWithLabel(chickens, "Chickens");
+  printZeroPaddedWithLabel(pigs, "Pigs");
+}
+
+printFarmInventory(7, 11, 3);
+
+// Pick out a single concept
+function zeroPad(number, width) {
+  var string = String(number);
+  while (string.length < 3)
+    string = "0" + string;
+  return string;
+}
+
+function printFarmInventory(cows, chickens, pigs) {
+  console.log(zeroPad(cows, 3) + " Cows");
+  console.log(zeroPad(chickens, 3) + " Chickens");
+  console.log(zeroPad(pigs, 3) + " Pigs");
+}
+
+printFarmInventory(7, 16, 3);
+
+// Write Min Function
+
+function min(a,b) {
+  if (a < b)
+    console.log(a);
+  else
+    console.log(b);
+};
+
+// Write Even Function Recursively
+
+function isEven(n) {
+  if (n === 0) {
+    return true;
+  } else if (n === 1) {
+    return false;
+  } else {
+    return isEven(n-2);
+  }
+};
+
+#+END_SRC
+
+** Data Structures: Arrays and Objects
+
+*** Array
+#+BEGIN_SRC javascript
+var listOfNumbers = [2, 3, 5, 7, 11];
+console.log(listOfNumbers[1]);
+// > 3
+console.log(listOfNumbers[1 - 1]);
+// > 2
+
+#+END_SRC
+
+*** Objects
+#+BEGIN_SRC javascript
+// Brace Notation
+var day1 = {
+  squirrel: false,
+  events: ["work", "touched tree", "pizza", "running",
+           "television"]
+};
+console.log(day1.squirrel);
+// > false
+console.log(day1.wolf);
+// > undefined
+day1.wolf = false;
+console.log(day.wolf);
+// > false
+
+#+END_SRC
